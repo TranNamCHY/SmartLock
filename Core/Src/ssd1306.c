@@ -31,8 +31,8 @@ static SSD1306_t SSD1306;
 #define SSD1306_ACTIVATE_SCROLL                      0x2F // Start scroll
 #define SSD1306_SET_VERTICAL_SCROLL_AREA             0xA3 // Set scroll range
 
-#define SSD1306_NORMALDISPLAY       0xA6
-#define SSD1306_INVERTDISPLAY       0xA7
+#define SSD1306_NORMALDISPLAY       				 0xA6
+#define SSD1306_INVERTDISPLAY       				 0xA7
 
 void SSD1306_DrawBitmap(int16_t x, int16_t y, const unsigned char* bitmap, int16_t w, int16_t h, uint16_t color)
 {
