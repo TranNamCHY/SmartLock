@@ -32,7 +32,7 @@ Flow chart of Major system:
 - When there is a request to access the ADMIN MENU, the system requires checking the user's card, password, and fingerprint. Only when all three pass can the user use the management function.
 - If a certain period of time passes, the system will enter sleep mode and will only wake up when an interrupt occurs at pin A0 – when the user presses the button, the user also uses this button to request access authentication for the ADMIN MENU.
 - The system performs the FOTA function through a handshake process with the ESP8266 circuit board via the UART1 communication pins, as follows:
-    \t• The system receives the Who request from the ESP8266 through an interrupt from the UART1 module.
+    &nbsp• The system receives the Who request from the ESP8266 through an interrupt from the UART1 module.
     \t• The system sends back a confirmation message for the program on STM32, which is currently an application program.
     • If it receives feedback from the ESP8266 that there is a new firmware version and an update is required, the system immediately resets to address 0x0800000 to switch to the Bootloader program's operation flow.
     • The Bootloader program continues to receive Who requests from the ESP8266 and responds by confirming that the STM32 is in the Bootloader program.
