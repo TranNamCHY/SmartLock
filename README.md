@@ -20,6 +20,9 @@ The System divided into 2 subsystems:
 
 The operation flow of Major and Minor system were illustrated by the flow chart as below:
 
+![Flow chart of Major system](./Image/mainflowchart.png)
+
+![[Flow chart of Minor system](./Image/minorflowchart.png)
 
 
 ```bash
