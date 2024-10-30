@@ -18,7 +18,9 @@ The System divided into 2 subsystems:
     the Internet such as FOTA, etc. It communicates with the STM32 microcontroller via the UART communication standard, carry 
     out requests sent from the central processor of the entire system and send back the desired results to the main system.
 
-First, Install dependencies (Required both on PC and Zynq7000):
+The operation flow of Major and Minor system were illustrated by the flow chart as below:
+
+
 
 ```bash
 pip install numpy
