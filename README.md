@@ -5,6 +5,7 @@ on passwords, magnetic cards and fingerprints. It controls the Servo for the doo
 addition it also has other functions such as power saving mode, or the ability to update firmware from far aka FOTA. 
 
 ## System Architecture
+![System Architecture](./Image/architecture.png)
 (/home/nambcn/tensor/SmartLock/Image/architecture.png)
 This CNN network can be used both on Personal computer and Zynq7000 SOC device. Obviously, when running on PC, you can only use the "CPU"
 functionality of Convolution2D and Maxpooling layer.
