@@ -6,9 +6,16 @@ addition it also has other functions such as power saving mode, or the ability t
 
 ## System Architecture
 ![System Architecture](./Image/architecture.png)
-(/home/nambcn/tensor/SmartLock/Image/architecture.png)
-This CNN network can be used both on Personal computer and Zynq7000 SOC device. Obviously, when running on PC, you can only use the "CPU"
-functionality of Convolution2D and Maxpooling layer.
+
+The System divided into 2 subsystems:
+    o Major system: Including microcontroller STM32F103C8T6 and peripherals used include: AS608 fingerprint sensor,
+    RFID magnetic RC 522 card sensor, 3x4 matrix keyboard module, 0.96 inch oled screen and 5V Servo motor. 
+    This system will perform all basic functions. Mainly, the STM32F103C8T6 microcontroller acts as the central microprocessor 
+    that controls the system's flow of operations and uses sensors and peripherals to perform system's functions.
+    
+    o Minor System: Only includes the ESP8266 circuit board, this system performs functions required to access and use 
+    the Internet such as FOTA, etc. It communicates with the STM32 microcontroller via the UART communication standard, carry 
+    out requests sent from the central processor of the entire system and send back the desired results to the main system.
 
 First, Install dependencies (Required both on PC and Zynq7000):
 
