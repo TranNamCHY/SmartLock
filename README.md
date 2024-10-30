@@ -22,7 +22,7 @@ The operation flow of Major and Minor system were illustrated by the flow chart 
 
 ![Flow chart of Major system](./Image/mainflowchart.png)
 
-![[Flow chart of Minor system](./Image/minorflowchart.png)
+![Flow chart of Minor system](./Image/minorflowchart.png)
 
 
 ```bash
