@@ -24,6 +24,23 @@ Flow chart of Major system:
 
 ![Flow chart of Major system](./Image/mainflowchart.png)
 
+- The main control program starts in the initialization state, during which it sets the operating mode and provides clock signals to the digital communication modules and GPIO pins.
+- After initialization and setup are complete, it checks the number of registered fingerprints stored in the flash memory of the STM32 microcontroller.
+- If the number of registered fingerprints is greater than 0, the system enters normal operating mode. In the opposite case, the system requires users to register at least one fingerprint – the fingerprint of the manager. The fingerprint database management functions only operate when the manager's fingerprint has been registered.
+- In the operational state, when there is a request to unlock the door, the system checks the user's fingerprint. If valid, it controls the servo to rotate and unlock the door, while simultaneously sending a database update request containing the employee's check-in/check-out time to the webserver. The format of the request is as follows:
+      “(Character with value 127)|ADDTIME|Context: (ID value)| \nText to translate: (ID value)|(Ký tự newline)”.
+- When there is a request to access the ADMIN MENU, the system requires checking the user's card, password, and fingerprint. Only when all three pass can the user use the management function.
+- If a certain period of time passes, the system will enter sleep mode and will only wake up when an interrupt occurs at pin A0 – when the user presses the button, the user also uses this button to request access authentication for the ADMIN MENU.
+- The system performs the FOTA function through a handshake process with the ESP8266 circuit board via the UART1 communication pins, as follows:
+    • The system receives the Who request from the ESP8266 through an interrupt from the UART1 module.
+    • The system sends back a confirmation message for the program on STM32, which is currently an application program.
+    • If it receives feedback from the ESP8266 that there is a new firmware version and an update is required, the system immediately resets to address 0x0800000 to switch to the Bootloader program's operation flow.
+    • The Bootloader program continues to receive Who requests from the ESP8266 and responds by confirming that the STM32 is in the Bootloader program.
+    • The system waits until it receives a START response from the ESP8266 and begins the process of receiving and writing firmware into the flash memory.
+    • The firmware will be transmitted line by line in HEX format. STM32 reads each line and checks for errors using a 2-byte checksum at the end of each record. If an error is detected, it will request the retransmission of that record.     If too many errors occur in a single record, the system confirms there is a fault in the physical transmission, at this point, the system will be reset and return to the initial state of the Bootloader program.
+    • After completing the reading and writing of firmware into the flash memory designated for the application program, the Bootloader will perform the procedure to jump to the recorded application program. This includes resetting the
+   PC pointer and vector table to the address of the new program, disabling the clock source of the peripherals, etc.
+
 Flow chart of Minor system:
 
 ![Flow chart of Minor system](./Image/minorflowchart.png)
