@@ -53,6 +53,15 @@ Flow chart of Minor system:
 
 ![Flow chart of Minor system](./Image/minorflowchart.png)
 
+- The auxiliary system will handle the Internet-related functions of the system, including performing FOTA as well as updating the database on the Webserver whenever there is a request from STM32.
+- The auxiliary system starts in the initialization state, during which it initializes and sets up the operation for the modules needed by the system.
+- Then, it checks for the latest firmware version on the system by sending an HTTP GET request to the NewVersion file on the webserver, and then compares it with the current version of the system, which is also stored in another file on the system. If there is, it will continue to perform an HTTP GET to download the firmware content saved in HEX format, the firmware file will be saved to a temporary file and then checked for errors. If there are no errors, it will be recorded into the backup file and then the system will perform the handshake procedures for the firmware transmission process. After completing the transmission process, the auxiliary system enters sleep mode.
+- In sleep mode, the system's Wifi and Bluetooth modules stop functioning, and the CPU's operation is temporarily blocked. The system will only wake up when a negative edge signal pulse on GPIO4 is sent from STM32 or when the sleep time has elapsed. The CPU will start operating again from the line after the sleep function.
+- When there is a wake-up signal, the system will check the UART receive buffer to read and process the database update commands sent from STM32. The commands that it cannot process – if the cause is not due to syntax errors or faulty information, will be saved in the Stored file so that they can be re-executed at the next wake-up.
+- After processing the current requests, it reopens the Stored file to sequentially handle the requests that were not completed, and the successfully processed requests will be deleted.
+- Finally, the system will check the UART receive buffer again to see if there are any requests during the process of handling the Stored file. If not,
+it goes back into sleep mode.
+- The system will check the firmware version each time it is reset or when it wakes up after the sleep period.
 ## More
 
 To understand more deeply about the system, you coud check my report attached at Document folder.
