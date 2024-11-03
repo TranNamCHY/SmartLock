@@ -64,4 +64,4 @@ it goes back into sleep mode.
 - The system will check the firmware version each time it is reset or when it wakes up after the sleep period.
 ## More
 
-To understand more deeply about the system, you coud check my report attached at Document folder: (https://github.com/TranNamCHY/SmartLock/tree/main/Document)
+To understand more deeply about the system, you coud check my report attached at Document folder: https://github.com/TranNamCHY/SmartLock/tree/main/Document
